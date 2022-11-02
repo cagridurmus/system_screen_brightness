@@ -15,7 +15,6 @@ migrate_working_dir/
 .pub/
 .dart_tool/
 .dart_tool 2/
-pubspec.lock
 flutter_export_environment.sh
 
 # IntelliJ related
