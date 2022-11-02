@@ -1,15 +1,35 @@
 # system_screen_brightness
 
-A new Flutter plugin project.
+A Plugin for controlling screen brightness.
 
 ## Getting Started
+### Install
+Add the following lines in your pubspec.yaml file
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+```yaml
+  system_screen_brightness: ^latest_version
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
+### API
+#### System current brightness
+```dart
+Future<double> get currentbrightnes async {
+  try {
+    return await SystemScreenBrightness().currentBrightness;
+  } catch (e) {
+    print(e);
+    throw 'Failed to get system current brightness brightness';
+  }
+}
+```
+#### Set brightness
+```dart
+Future<void> setSystemScreenBrightness(double brightness) async {
+  try {
+    await SystemScreenBrightness.setSystemScreenBrightness(brightness);
+  } catch (e) {
+    print(e);
+    throw 'Failed to set system screen brightness';
+  }
+}
+```
