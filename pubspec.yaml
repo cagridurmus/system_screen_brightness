@@ -1,6 +1,6 @@
 name: system_screen_brightness
 description: A Plugin for controlling system screen brightness.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/cagridurmus/system_screen_brightness
 
 environment:
