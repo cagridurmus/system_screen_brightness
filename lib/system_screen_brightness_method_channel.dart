@@ -14,7 +14,7 @@ class MethodChannelSystemScreenBrightness extends SystemScreenBrightnessPlatform
   static const methodChannel = MethodChannel(pluginMethodChannelName);
 
   @override
-  Future<void> setSystemScreenBrightness(double brightness) async {
+  Future<void> setSystemScreenBrightness(int brightness) async {
 
     if (!brightness.isInRange(minBrightness, maxBrightness)) {
       throw RangeError.range(brightness, minBrightness, maxBrightness);

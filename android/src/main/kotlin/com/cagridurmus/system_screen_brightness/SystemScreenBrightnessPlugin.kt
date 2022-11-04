@@ -26,9 +26,10 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
   private lateinit var mActivity: Activity
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+    appContext = flutterPluginBinding.applicationContext
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, CHANNEL)
     channel.setMethodCallHandler(this)
-    appContext = flutterPluginBinding.applicationContext
+
 
   }
 
@@ -36,8 +37,12 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     when(call.method){
       "setSystemScreenBrightness" -> {
-        val brightness: Double = call.argument("brightness")!!
-        result.success(setScreenBrightness((brightness * 255.0).toInt()))
+        val brightness: Int = call.argument("brightness")!!
+        if (brightness == null) {
+          result.error("-2", "Unexpected error on null brightness", null)
+          return
+        }
+        setScreenBrightness(brightness)
       }
       "checkSystemWritePermission" -> result.success(checkSystemWritePermission())
       "openAndroidPermissionsMenu" -> result.success(openAndroidPermissionsMenu())
@@ -48,17 +53,13 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
-    appContext=null
   }
 
   override fun onAttachedToActivity(binding: ActivityPluginBinding) {
     mActivity = binding.activity
-    appContext = mActivity.applicationContext
-    checkSystemWritePermission()
   }
 
   override fun onDetachedFromActivityForConfigChanges() {
-    /*this.mActivity = null*/
 
   }
 
@@ -70,7 +71,7 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
     TODO("Not yet implemented")
   }
 
-  private fun setScreenBrightness(screenBrightnessValue: Int){
+  private fun setScreenBrightness(brightness: Int){
     Settings.System.putInt(
       appContext?.contentResolver,
       Settings.System.SCREEN_BRIGHTNESS_MODE,
@@ -78,9 +79,11 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
     )
     Settings.System.putInt(
       appContext?.contentResolver,
-      Settings.System.SCREEN_BRIGHTNESS, screenBrightnessValue
+      Settings.System.SCREEN_BRIGHTNESS, brightness
     )
+
   }
+
 
 
   private fun checkSystemWritePermission(): Boolean{

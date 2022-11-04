@@ -98,7 +98,8 @@ class _MyAppState extends State<MyApp> {
 
                 ElevatedButton(
                   onPressed: () async {
-                    await _systemScreenBrightnessPlugin.openAndroidPermissionsMenu();
+                    double brightness = await _systemScreenBrightnessPlugin.currentBrightness;
+                    print(brightness);
                   }, child: Icon(Icons.power_settings_new),
                 ),
                 Text(_currentBrightness.toString())
@@ -112,7 +113,7 @@ class _MyAppState extends State<MyApp> {
                     max: 1.0,
                     onChanged: ((double value){
                       _brightness = value;
-                      _systemScreenBrightnessPlugin.setSystemScreenBrightness(_brightness);
+                      _systemScreenBrightnessPlugin.setSystemScreenBrightness((_brightness * 255).toInt());
                       setState(() {
                       });
                     })

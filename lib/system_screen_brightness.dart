@@ -11,13 +11,13 @@ import 'package:system_screen_brightness/system_screen_brightness_platform_inter
 class SystemScreenBrightness {
 
 
-  Future<double> get currentBrightness async{ return SystemScreenBrightnessPlatform.instance.currentBrightness; }
+  Future<double> get currentBrightness  => SystemScreenBrightnessPlatform.instance.currentBrightness; 
 
-  Future<void> setSystemScreenBrightness(double brigthness) async{ return SystemScreenBrightnessPlatform.instance.setSystemScreenBrightness(brigthness); }
+  Future<void> setSystemScreenBrightness(int brigthness) => SystemScreenBrightnessPlatform.instance.setSystemScreenBrightness(brigthness);
 
-  Future<bool> get checkSystemWritePermission async{ return SystemScreenBrightnessPlatform.instance.checkSystemWritePermission; }
+  Future<bool> get checkSystemWritePermission => SystemScreenBrightnessPlatform.instance.checkSystemWritePermission; 
 
-  Future<void> openAndroidPermissionsMenu() async { return SystemScreenBrightnessPlatform.instance.openAndroidPermissionsMenu(); }
+  Future<void> openAndroidPermissionsMenu() => SystemScreenBrightnessPlatform.instance.openAndroidPermissionsMenu(); 
 
 
 }

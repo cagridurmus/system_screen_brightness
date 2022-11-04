@@ -24,7 +24,7 @@ abstract class SystemScreenBrightnessPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<void> setSystemScreenBrightness(double brigthness) async{
+  Future<void> setSystemScreenBrightness(int brigthness) async{
     throw UnimplementedError('setSystemScreenBrightness() has not been implemented.');
   }
 
