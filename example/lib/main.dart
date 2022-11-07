@@ -29,6 +29,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     initPlatformState();
     /*initPlatformState2();*/
+
   }
 
   initPlatformState() async{
@@ -85,10 +86,8 @@ class _MyAppState extends State<MyApp> {
                 Switch(
                   value: _isPermission,
                   onChanged: (value) async{
-                    if(!_isPermission) {
-                      await _systemScreenBrightnessPlugin.openAndroidPermissionsMenu();
-                      _isPermission = value;
-                    }
+                    await _systemScreenBrightnessPlugin.openAndroidPermissionsMenu();
+                    _isPermission = value;
                     setState(() {
 
                     });

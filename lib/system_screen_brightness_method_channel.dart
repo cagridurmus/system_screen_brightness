@@ -42,7 +42,7 @@ class MethodChannelSystemScreenBrightness extends SystemScreenBrightnessPlatform
   }
 
   @override
-  Future<void> changeWriteSettingPermission() async {
+  Future<void> openAndroidPermissionsMenu() async {
     await methodChannel.invokeMethod(methodNameOpenAndroidPermissionsMenu);
   }
 

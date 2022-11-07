@@ -45,7 +45,7 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
         setScreenBrightness(brightness)
       }
       "checkSystemWritePermission" -> result.success(checkSystemWritePermission())
-      "openAndroidPermissionsMenu" -> result.success(openAndroidPermissionsMenu())
+      "openAndroidPermissionsMenu" -> openAndroidPermissionsMenu()
       "getSystemScreenBrightness" -> result.success(getScreenBrightness())
       else -> result.notImplemented()
     }
@@ -88,7 +88,7 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
 
   private fun checkSystemWritePermission(): Boolean{
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-      if (Settings.System.canWrite(appContext)) return true else openAndroidPermissionsMenu()
+      if (Settings.System.canWrite(appContext)) return true else return false
     }
     return false
   }
