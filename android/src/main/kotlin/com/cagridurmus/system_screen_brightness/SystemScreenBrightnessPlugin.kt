@@ -23,7 +23,7 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
 
   private lateinit var channel : MethodChannel
   private var appContext: Context? = null
-  private lateinit var mActivity: Activity
+  private var mActivity: Activity? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     appContext = flutterPluginBinding.applicationContext
@@ -53,6 +53,7 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
+
   }
 
   override fun onAttachedToActivity(binding: ActivityPluginBinding) {
@@ -60,15 +61,15 @@ class SystemScreenBrightnessPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
   }
 
   override fun onDetachedFromActivityForConfigChanges() {
-
+    mActivity = null
   }
 
   override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-    TODO("Not yet implemented")
+    mActivity = binding.activity
   }
 
   override fun onDetachedFromActivity() {
-    TODO("Not yet implemented")
+    mActivity = null
   }
 
   private fun setScreenBrightness(brightness: Int){
